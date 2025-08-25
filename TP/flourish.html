@@ -1,73 +1,54 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bar Chart Race – Top 10 artistas por semana</title>
-    <meta name="description" content="Evolución semanal de mis artistas más escuchados (bar chart race) usando datos personales de Spotify y YouTube Music." />
-    <style>
-      :root { color-scheme: light dark; }
-      html, body { margin: 0; padding: 0; }
-      body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        line-height: 1.5;
-        background: canvas; /* respeta modo claro/oscuro */
-        color: canvastext;
-      }
-      .wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 2rem 1.25rem 3rem;
-      }
-      header h1 { margin: 0 0 .25rem; font-size: 1.9rem; }
-      header p.sub { margin: 0 0 1.25rem; opacity: .75; }
-      .viz {
-        /* Hace que el embed sea responsive */
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 9;   /* podés ajustar la relación si querés */
-        background: transparent;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,.08);
-      }
-      .viz > .flourish-embed,
-      .viz iframe, .viz img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-      }
-      footer {
-        margin-top: 1.5rem;
-        font-size: .95rem;
-        opacity: .75;
-      }
-      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    </style>
-  </head>
-  <body>
-    <main class="wrap">
-      <header>
-        <h1>Top 10 artistas por semana</h1>
-        <p class="sub">Bar chart race — toda la historia • Fuente: exportes personales de Spotify + YouTube Music</p>
-      </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Top 10 artistas por semana – Bar chart race</title>
+  <style>
+    :root { color-scheme: light dark; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: canvas; color: canvastext;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+    h1 { margin: 0 0 .25rem; font-size: 1.9rem; }
+    p.sub { margin: 0 0 1.25rem; opacity: .75; }
 
-      <!-- Flourish embed -->
-      <div class="viz">
-        <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/24824827">
-          <script src="https://public.flourish.studio/resources/embed.js"></script>
-          <noscript>
-            <img src="https://public.flourish.studio/visualisation/24824827/thumbnail"
-                 width="100%" alt="bar-chart-race visualization" />
-          </noscript>
-        </div>
+    /* 🔧 Alto flexible: nunca uses aspect-ratio fijo para Flourish si se corta */
+    .viz {
+      position: relative;
+      width: 100%;
+      height: clamp(520px, 75vh, 900px); /* mínimo 520px, ideal 75% del viewport, tope 900px */
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      background: transparent;
+    }
+    .viz > .flourish-embed,
+    .viz iframe, .viz img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .viz { height: clamp(420px, 62vh, 720px); } /* un poco menos alto en móvil */
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Top 10 artistas por semana</h1>
+    <p class="sub">Bar chart race — toda la historia • Fuente: exportes personales de Spotify + YouTube Music</p>
+
+    <div class="viz">
+      <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/24824827">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript>
+          <img src="https://public.flourish.studio/visualisation/24824827/thumbnail" width="100%" alt="bar-chart-race visualization" />
+        </noscript>
       </div>
-
-      <footer>
-        <!-- Podés editar este texto o borrarlo -->
-        <p>Trabajo Práctico – Visualización de datos personales. Hecho con <a href="https://flourish.studio/" target="_blank" rel="noopener">Flourish</a> y GitHub Pages.</p>
-      </footer>
-    </main>
-  </body>
+    </div>
+  </main>
+</body>
 </html>
