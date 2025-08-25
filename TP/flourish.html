@@ -3,37 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Top 10 artistas por semana – Bar chart race</title>
+  <title>Top 10 artistas por semana — Bar chart race</title>
   <style>
     :root { color-scheme: light dark; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: canvas; color: canvastext;
-      line-height: 1.5;
+      line-height: 1.5; background: canvas; color: canvastext;
     }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 3rem; }
     h1 { margin: 0 0 .25rem; font-size: 1.9rem; }
     p.sub { margin: 0 0 1.25rem; opacity: .75; }
-
-    /* 🔧 Alto flexible: nunca uses aspect-ratio fijo para Flourish si se corta */
-    .viz {
-      position: relative;
-      width: 100%;
-      height: clamp(520px, 75vh, 900px); /* mínimo 520px, ideal 75% del viewport, tope 900px */
-      overflow: hidden;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-      background: transparent;
-    }
-    .viz > .flourish-embed,
-    .viz iframe, .viz img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-    }
-
-    @media (max-width: 640px) {
-      .viz { height: clamp(420px, 62vh, 720px); } /* un poco menos alto en móvil */
-    }
+    /* ⚠️ NO fijamos aspect-ratio ni position absolute para que no se corte nada */
+    .viz { width: 100%; min-height: 560px; }
+    @media (max-width: 640px){ .viz{ min-height: 480px; } }
   </style>
 </head>
 <body>
@@ -42,10 +25,12 @@
     <p class="sub">Bar chart race — toda la historia • Fuente: exportes personales de Spotify + YouTube Music</p>
 
     <div class="viz">
+      <!-- Flourish embed EXACTO (tu visualisation/24824827) -->
       <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/24824827">
         <script src="https://public.flourish.studio/resources/embed.js"></script>
         <noscript>
-          <img src="https://public.flourish.studio/visualisation/24824827/thumbnail" width="100%" alt="bar-chart-race visualization" />
+          <img src="https://public.flourish.studio/visualisation/24824827/thumbnail"
+               width="100%" alt="bar-chart-race visualization" />
         </noscript>
       </div>
     </div>
