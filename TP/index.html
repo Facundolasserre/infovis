@@ -28,13 +28,12 @@
     .title{font-weight:800;letter-spacing:.2px;font-size:clamp(22px,2.2vw,32px);}
     .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
-    /* NUEVO: forzar 1 columna (ancho completo) cuando lo pidamos */
-    .cards-1col{grid-template-columns:1fr;}
+    .cards-1col{grid-template-columns:1fr;} /* ancho completo */
     .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 8px;}
     .card h3{margin:.2rem 0 10px;font-size:18px}
     .card p{margin:0 0 8px;color:var(--muted);font-size:13px}
 
-    /* Marco blanco para imágenes (SVG/PNG) */
+    /* Marco blanco para imágenes (no usado ahora) */
     .frame{
       background:#fff;
       border-radius:16px;
@@ -42,7 +41,7 @@
     }
     .frame img{display:block;width:100%;height:auto}
 
-    /* Marco blanco con padding para iframes/embeds (Datawrapper / Flourish / Tableau) */
+    /* Marco blanco con padding para iframes/embeds y también SVG de RAWGraphs */
     .frame-padded{
       background:#fff;
       border-radius:16px;
@@ -55,6 +54,7 @@
     .frame-padded .flourish-embed,
     .frame-padded .tableauPlaceholder,
     .frame-padded object{display:block;width:100%;border:0;}
+    .frame-padded img{display:block;width:100%;height:auto;}
 
     .byline{margin-top:24px;color:var(--muted);font-size:12px}
     .tag{display:inline-block;background:#1a1d27;color:#b4c6ff;border:1px solid #27304d;padding:3px 8px;border-radius:999px;font-size:12px}
@@ -82,7 +82,7 @@
     <!-- Totales (Datawrapper) -->
     <section id="totales" class="cards cards-1col">
       <article class="card">
-        <h3>¿Donde escucho más música?</h3>
+        <h3>¿Dónde escucho más música?</h3>
         <p>Comparación total de reproducciones acumuladas entre Spotify y YouTube Music. (Hecho con Datawrapper)</p>
         <div class="frame-padded">
           <iframe title="¿Dónde escucho más música?" aria-label="Bar Chart"
@@ -95,20 +95,37 @@
       </article>
     </section>
 
-    <!-- Top 10 (RAWGraphs)  -->
+    <!-- Top 10 (RAWGraphs) — ahora con el mismo marco y ancho que el resto -->
     <section id="tops" class="cards cards-1col" style="margin-top:14px">
       <article class="card">
         <h3>¿Cuáles son mis canciones más reproducidas?</h3>
         <p>Top 10 canciones por reproducciones. (Hecho con RAWGraphs)</p>
-        <div class="frame">
+        <div class="frame-padded">
           <img src="max_plays.svg" alt="Top 10 por reproducciones" />
         </div>
       </article>
+
       <article class="card">
-        <h3>¿Cuáles son las canciones que realmente más escuche?</h3>
+        <h3>¿Cuáles son las canciones que realmente más escuché?</h3>
         <p>Top 10 canciones por tiempo escuchado. (Hecho con RAWGraphs)</p>
-        <div class="frame">
+        <div class="frame-padded">
           <img src="max_mins.svg" alt="Top 10 por tiempo" />
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Top 10 artistas por reproducciones</h3>
+        <p>Conteo total de plays por artista. (Hecho con RAWGraphs)</p>
+        <div class="frame-padded">
+          <img src="artists_plays.svg" alt="Top 10 de artistas por reproducciones" />
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Top 10 artistas por minutos escuchados</h3>
+        <p>Suma de minutos reproducidos por artista. (Hecho con RAWGraphs)</p>
+        <div class="frame-padded">
+          <img src="artists_mins.svg" alt="Top 10 de artistas por minutos escuchados" />
         </div>
       </article>
     </section>
@@ -151,8 +168,7 @@
               var vizElement = divElement.getElementsByTagName('object')[0];
               function setVizHeight(){
                 var w = divElement.offsetWidth;
-                /* ratios distintos por tamaño, para eliminar el espacio blanco sobrante */
-                var ratio = 0.42;          // desktop
+                var ratio = 0.42;          // desktop (recorta blanco sobrante)
                 if (w < 900) ratio = 0.58;  // tablets
                 if (w < 600) ratio = 0.82;  // móviles
                 vizElement.style.width = '100%';
