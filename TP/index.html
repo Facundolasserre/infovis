@@ -49,10 +49,6 @@
       box-shadow:0 12px 32px rgba(0,0,0,.28);
       overflow:hidden;
     }
-    /* Versión compacta: menos padding arriba/abajo para Tableau */
-    .frame-padded-tight{
-      padding:10px 14px;
-    }
     .frame-padded iframe,
     .frame-padded .flourish-embed,
     .frame-padded .tableauPlaceholder,
@@ -97,6 +93,30 @@
       </article>
     </section>
 
+    <!-- Sección mensual (oculta por ahora; completar con IDs reales cuando los tengas) -->
+    <section id="mensual" class="cards" style="margin-top:14px; display:none">
+      <article class="card">
+        <h3>Evolución mensual de reproducciones</h3>
+        <p>Plays por mes en cada plataforma.</p>
+        <div class="frame-padded">
+          <iframe title="Mensual plays" aria-label="Line chart" id="dw-mensual-plays"
+            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_plays/1/"
+            scrolling="no" frameborder="0"
+            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Evolución mensual (minutos)</h3>
+        <p>Tiempo total escuchado (min) por mes.</p>
+        <div class="frame-padded">
+          <iframe title="Mensual minutos" aria-label="Line chart" id="dw-mensual-min"
+            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_min/1/"
+            scrolling="no" frameborder="0"
+            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
+        </div>
+      </article>
+    </section>
+
     <!-- Top 10 (RAWGraphs) -->
     <section id="tops" class="cards" style="margin-top:14px">
       <article class="card">
@@ -118,11 +138,11 @@
     <!-- ¿Cuándo escucho? (Tableau) -->
     <section id="cuando" class="cards" style="margin-top:14px">
       <article class="card">
-        <h3>¿En qué días y a qué horas escucho más música?</h3>
-        <p>Mapa de calor por día de la semana y hora. Color = minutos escuchados.</p>
+        <h3></h3>
+        <p></p>
 
-        <!-- Marco con padding reducido para achicar el blanco sobrante -->
-        <div class="frame-padded frame-padded-tight">
+        <!-- Misma caja que los otros embeds; recorte ajustado via altura -->
+        <div class="frame-padded">
           <div class='tableauPlaceholder' id='viz1758515888424' style='position: relative'>
             <noscript>
               <a href='#'>
@@ -136,7 +156,7 @@
               <param name='embed_code_version' value='3' />
               <param name='site_root' value='' />
               <param name='name' value='horasdeldiadelasemana/Sheet1' />
-              <!-- Opcional: sin toolbar/contador para ganar px verticales -->
+              <!-- Sin toolbar/contador para ganar px verticales -->
               <param name='tabs' value='no' />
               <param name='toolbar' value='no' />
               <param name='display_count' value='no' />
@@ -153,8 +173,8 @@
             var divElement = document.getElementById('viz1758515888424');
             var vizElement = divElement.getElementsByTagName('object')[0];
             vizElement.style.width = '100%';
-            /* Menos altura total (0.66 en lugar de 0.75) para reducir el blanco sobrante */
-            vizElement.style.height = (divElement.offsetWidth * 0.66) + 'px';
+            /* Menos altura para eliminar el blanco inferior/superior del viz */
+            vizElement.style.height = (divElement.offsetWidth * 0.58) + 'px';
             var scriptElement = document.createElement('script');
             scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
