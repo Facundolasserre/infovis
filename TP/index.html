@@ -5,22 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mis escuchas – Spotify vs YouTube Music</title>
   <meta name="description" content="Dashboard con mis estadísticas de escuchas: Spotify vs YouTube Music, top 10 de canciones y más." />
+  <meta name="theme-color" content="#0b0c10" />
   <style>
     :root{
-      --bg:#0b0c10; /* fondo gris muy oscuro */
-      --card:#111218; /* tarjetas */
+      --bg:#0b0c10;        /* fondo */
+      --card:#111218;      /* tarjetas */
       --text:#e6e7eb;
       --muted:#a1a6b3;
-      --brand:#4f8cff; /* acento */
+      --brand:#4f8cff;     /* acento */
       --radius:18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --shadow:0 10px 30px rgba(0,0,0,.25);
     }
     html,body{margin:0;height:100%;}
-    body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0a0b0e 0%,#0b0c10 40%,#0b0c10 100%);color:var(--text);} 
-    .wrap{max-width:1100px;margin:auto;padding:28px 18px 60px;}
-    header{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;margin: 8px 0 22px;
+    body{
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg,#0a0b0e 0%,#0b0c10 40%,#0b0c10 100%);
+      color:var(--text);
     }
+    .wrap{max-width:1100px;margin:auto;padding:28px 18px 60px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:8px 0 22px;}
     .title{font-weight:800;letter-spacing:.2px;font-size:clamp(22px,2.2vw,32px);}
     .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
@@ -29,6 +32,17 @@
     .card p{margin:0 0 8px;color:var(--muted);font-size:13px}
     .frame{background:#fff;border-radius:12px;overflow:hidden;}
     .frame img{display:block;width:100%;height:auto}
+
+    /* Embeds sobre fondo oscuro: borde/sombra y recorte nítido */
+    .frame-embed{
+      background:transparent;
+      border:1px solid #273045;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .frame-embed iframe{display:block;width:100%;border:0;}
+
     .byline{margin-top:24px;color:var(--muted);font-size:12px}
     .tag{display:inline-block;background:#1a1d27;color:#b4c6ff;border:1px solid #27304d;padding:3px 8px;border-radius:999px;font-size:12px}
     .nav{display:flex;gap:8px;flex-wrap:wrap}
@@ -55,28 +69,37 @@
       <article class="card">
         <h3>Reproducciones totales por plataforma</h3>
         <p>Comparación total de plays acumulados entre Spotify y YouTube Music.</p>
-        <div class="frame">
-          <!-- REEMPLAZÁ CHART_ID_totales y versión con tu ID/version de Datawrapper -->
-          <iframe title="¿Donde escucho más música?" aria-label="Bar Chart" id="datawrapper-chart-cVDWG" src="https://datawrapper.dwcdn.net/cVDWG/1/" scrolling="no" frameborder="0" style="width:0; min-width:100% !important; border:0;" height="400"></iframe>
+        <div class="frame-embed">
+          <iframe title="¿Donde escucho más música?" aria-label="Bar Chart"
+            id="datawrapper-chart-cVDWG"
+            src="https://datawrapper.dwcdn.net/cVDWG/1/"
+            scrolling="no" frameborder="0"
+            style="width:0; min-width:100% !important; border:0;"
+            height="400"></iframe>
         </div>
       </article>
     </section>
 
+    <!-- Sección mensual (oculta por ahora; completar con IDs reales cuando los tengas) -->
     <section id="mensual" class="cards" style="margin-top:14px; display:none">
       <article class="card">
         <h3>Evolución mensual de reproducciones</h3>
         <p>Plays por mes en cada plataforma.</p>
-        <div class="frame">
-          <!-- REEMPLAZÁ CHART_ID_mensual_plays -->
-          <iframe title="Mensual plays" aria-label="Line chart" id="dw-mensual-plays" src="https://datawrapper.dwcdn.net/CHART_ID_mensual_plays/1/" scrolling="no" frameborder="0" style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
+        <div class="frame-embed">
+          <iframe title="Mensual plays" aria-label="Line chart" id="dw-mensual-plays"
+            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_plays/1/"
+            scrolling="no" frameborder="0"
+            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
         </div>
       </article>
       <article class="card">
         <h3>Evolución mensual (minutos)</h3>
         <p>Tiempo total escuchado (min) por mes.</p>
-        <div class="frame">
-          <!-- REEMPLAZÁ CHART_ID_mensual_min -->
-          <iframe title="Mensual minutos" aria-label="Line chart" id="dw-mensual-min" src="https://datawrapper.dwcdn.net/CHART_ID_mensual_min/1/" scrolling="no" frameborder="0" style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
+        <div class="frame-embed">
+          <iframe title="Mensual minutos" aria-label="Line chart" id="dw-mensual-min"
+            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_min/1/"
+            scrolling="no" frameborder="0"
+            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
         </div>
       </article>
     </section>
@@ -86,7 +109,6 @@
         <h3>Top 10 canciones por reproducciones</h3>
         <p>Gráfico de barras (RAWGraphs) exportado como SVG.</p>
         <div class="frame">
-          <!-- Copiá el SVG (o PNG) a /assets y actualizá la ruta -->
           <img src="max_plays.svg" alt="Top 10 por reproducciones" />
         </div>
       </article>
@@ -103,7 +125,7 @@
       <article class="card">
         <h3>¿Quién fue semana a semana mi artista más escuchado?</h3>
         <p>Bar chart race generado con Flourish.</p>
-        <div class="frame">
+        <div class="frame-embed">
           <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/24824827">
             <script src="https://public.flourish.studio/resources/embed.js"></script>
             <noscript><img src="https://public.flourish.studio/visualisation/24824827/thumbnail" width="100%" alt="bar-chart-race visualization" /></noscript>
@@ -112,28 +134,31 @@
       </article>
     </section>
 
-    <p class="byline"><span class="tag">Datos personales</span> · Generado con Datawrapper &amp; RAWGraphs · Paleta: Okabe &amp; Ito · Código: GitHub Pages</p>
+    <p class="byline">
+      <span class="tag">Datos personales</span> · Generado con Datawrapper &amp; RAWGraphs ·
+      Paleta: Okabe &amp; Ito · Código: GitHub Pages
+    </p>
 
     <footer>
-      Facundo Lasserre, 62165
+      Facundo Lasserre, 62165 · © <span id="y"></span>
     </footer>
   </div>
 
-  <!-- Script oficial de auto‑resize de Datawrapper (una sola vez) -->
+  <!-- Auto-resize oficial para Datawrapper (una sola vez) -->
   <script>
-  window.addEventListener("message", (event) => {
-    if (event.data["datawrapper-height"]) {
-      const iframes = document.querySelectorAll("iframe");
-      for (const id in event.data["datawrapper-height"]) {
-        for (let i = 0; i < iframes.length; i++) {
-          if (iframes[i].contentWindow === event.source) {
-            iframes[i].style.height = event.data["datawrapper-height"][id] + "px";
+    window.addEventListener("message", (event) => {
+      if (event.data["datawrapper-height"]) {
+        const iframes = document.querySelectorAll("iframe");
+        for (const id in event.data["datawrapper-height"]) {
+          for (let i = 0; i < iframes.length; i++) {
+            if (iframes[i].contentWindow === event.source) {
+              iframes[i].style.height = event.data["datawrapper-height"][id] + "px";
+            }
           }
         }
       }
-    }
-  });
-  document.getElementById('y').textContent = new Date().getFullYear();
+    });
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
