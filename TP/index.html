@@ -15,7 +15,7 @@
       --brand:#4f8cff;     /* acento */
       --radius:18px;
       --shadow:0 10px 30px rgba(0,0,0,.25);
-      --chart-pad:18px;    /* >>> grosor del borde blanco alrededor del chart <<< */
+      --chart-pad:18px;    /* grosor del borde blanco alrededor de los embeds */
     }
     html,body{margin:0;height:100%;}
     body{
@@ -32,7 +32,7 @@
     .card h3{margin:.2rem 0 10px;font-size:18px}
     .card p{margin:0 0 8px;color:var(--muted);font-size:13px}
 
-    /* Marco blanco para imágenes planas (SVG/PNG) */
+    /* Marco blanco para imágenes (SVG/PNG) */
     .frame{
       background:#fff;
       border-radius:16px;
@@ -40,17 +40,19 @@
     }
     .frame img{display:block;width:100%;height:auto}
 
-    /* Marco blanco con PADDING para iframes/embeds (Datawrapper/Flourish) */
+    /* Marco blanco con padding para iframes/embeds (Datawrapper / Flourish / Tableau) */
     .frame-padded{
       background:#fff;
       border-radius:16px;
-      padding:var(--chart-pad);        /* <<< ajustá acá el borde blanco */
-      border:1px solid #e9eaee;        /* línea sutil encima del blanco */
+      padding:var(--chart-pad);
+      border:1px solid #e9eaee;
       box-shadow:0 12px 32px rgba(0,0,0,.28);
-      overflow:hidden;                 /* que las esquinas se recorten perfecto */
+      overflow:hidden;
     }
     .frame-padded iframe,
-    .frame-padded .flourish-embed{display:block;width:100%;border:0;}
+    .frame-padded .flourish-embed,
+    .frame-padded .tableauPlaceholder,
+    .frame-padded object{display:block;width:100%;border:0;}
 
     .byline{margin-top:24px;color:var(--muted);font-size:12px}
     .tag{display:inline-block;background:#1a1d27;color:#b4c6ff;border:1px solid #27304d;padding:3px 8px;border-radius:999px;font-size:12px}
@@ -70,10 +72,12 @@
       <nav class="nav">
         <a href="#totales">Totales</a>
         <a href="#tops">Top 10</a>
+        <a href="#cuando">¿Cuándo escucho?</a>
         <a href="#ranking">Ranking</a>
       </nav>
     </header>
 
+    <!-- Totales (Datawrapper) -->
     <section id="totales" class="cards">
       <article class="card">
         <h3>Reproducciones totales por plataforma</h3>
@@ -89,7 +93,7 @@
       </article>
     </section>
 
-    <!-- Sección mensual (oculta por ahora) -->
+    <!-- Sección mensual (oculta por ahora; completar con IDs reales cuando los tengas) -->
     <section id="mensual" class="cards" style="margin-top:14px; display:none">
       <article class="card">
         <h3>Evolución mensual de reproducciones</h3>
@@ -113,6 +117,7 @@
       </article>
     </section>
 
+    <!-- Top 10 (RAWGraphs) -->
     <section id="tops" class="cards" style="margin-top:14px">
       <article class="card">
         <h3>Top 10 canciones por reproducciones</h3>
@@ -130,6 +135,52 @@
       </article>
     </section>
 
+    <!-- ¿Cuándo escucho? (Tableau) -->
+    <section id="cuando" class="cards" style="margin-top:14px">
+      <article class="card">
+        <h3>¿En qué días y a qué horas escucho más música?</h3>
+        <p>Mapa de calor por día de la semana y hora. Color = minutos escuchados.</p>
+        <div class="frame-padded">
+          <!-- Embed de Tableau: pegado tal cual nos pasaste -->
+          <div class='tableauPlaceholder' id='viz1758515888424' style='position: relative'>
+            <noscript>
+              <a href='#'>
+                <img alt='¿En qué días y a qué horas escucho más música? Mapa de calor por día de la semana y hora.'
+                     src='https://public.tableau.com/static/images/ho/horasdeldiadelasemana/Sheet1/1_rss.png'
+                     style='border: none' />
+              </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='site_root' value='' />
+              <param name='name' value='horasdeldiadelasemana/Sheet1' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/ho/horasdeldiadelasemana/Sheet1/1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='es-ES' />
+              <param name='filter' value='publish=yes' />
+            </object>
+          </div>
+          <script type='text/javascript'>
+            var divElement = document.getElementById('viz1758515888424');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width = '100%';
+            vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
+        </div>
+      </article>
+    </section>
+
+    <!-- Ranking (Flourish) -->
     <section id="ranking" class="cards" style="margin-top:14px">
       <article class="card">
         <h3>¿Quién fue semana a semana mi artista más escuchado?</h3>
@@ -137,19 +188,21 @@
         <div class="frame-padded">
           <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/24824827">
             <script src="https://public.flourish.studio/resources/embed.js"></script>
-            <noscript><img src="https://public.flourish.studio/visualisation/24824827/thumbnail" width="100%" alt="bar-chart-race visualization" /></noscript>
+            <noscript>
+              <img src="https://public.flourish.studio/visualisation/24824827/thumbnail" width="100%" alt="bar-chart-race visualization" />
+            </noscript>
           </div>
         </div>
       </article>
     </section>
 
     <p class="byline">
-      <span class="tag">Datos personales</span> · Generado con Datawrapper &amp; RAWGraphs ·
+      <span class="tag">Datos personales</span> · Generado con Datawrapper, RAWGraphs &amp; Tableau ·
       Paleta: Okabe &amp; Ito · Código: GitHub Pages
     </p>
 
     <footer>
-      Facundo Lasserre, 62165
+      Facundo Lasserre, 62165 · © <span id="y"></span>
     </footer>
   </div>
 
