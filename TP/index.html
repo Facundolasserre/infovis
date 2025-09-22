@@ -93,30 +93,6 @@
       </article>
     </section>
 
-    <!-- Sección mensual (oculta por ahora; completar con IDs reales cuando los tengas) -->
-    <section id="mensual" class="cards" style="margin-top:14px; display:none">
-      <article class="card">
-        <h3>Evolución mensual de reproducciones</h3>
-        <p>Plays por mes en cada plataforma.</p>
-        <div class="frame-padded">
-          <iframe title="Mensual plays" aria-label="Line chart" id="dw-mensual-plays"
-            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_plays/1/"
-            scrolling="no" frameborder="0"
-            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
-        </div>
-      </article>
-      <article class="card">
-        <h3>Evolución mensual (minutos)</h3>
-        <p>Tiempo total escuchado (min) por mes.</p>
-        <div class="frame-padded">
-          <iframe title="Mensual minutos" aria-label="Line chart" id="dw-mensual-min"
-            src="https://datawrapper.dwcdn.net/CHART_ID_mensual_min/1/"
-            scrolling="no" frameborder="0"
-            style="width:0; min-width:100% !important; border:0;" height="460"></iframe>
-        </div>
-      </article>
-    </section>
-
     <!-- Top 10 (RAWGraphs) -->
     <section id="tops" class="cards" style="margin-top:14px">
       <article class="card">
@@ -141,7 +117,6 @@
         <h3></h3>
         <p></p>
 
-        <!-- Misma caja que los otros embeds; recorte ajustado via altura -->
         <div class="frame-padded">
           <div class='tableauPlaceholder' id='viz1758515888424' style='position: relative'>
             <noscript>
@@ -156,7 +131,6 @@
               <param name='embed_code_version' value='3' />
               <param name='site_root' value='' />
               <param name='name' value='horasdeldiadelasemana/Sheet1' />
-              <!-- Sin toolbar/contador para ganar px verticales -->
               <param name='tabs' value='no' />
               <param name='toolbar' value='no' />
               <param name='display_count' value='no' />
@@ -170,14 +144,25 @@
             </object>
           </div>
           <script type='text/javascript'>
-            var divElement = document.getElementById('viz1758515888424');
-            var vizElement = divElement.getElementsByTagName('object')[0];
-            vizElement.style.width = '100%';
-            /* Menos altura para eliminar el blanco inferior/superior del viz */
-            vizElement.style.height = (divElement.offsetWidth * 0.58) + 'px';
-            var scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            (function(){
+              var divElement = document.getElementById('viz1758515888424');
+              var vizElement = divElement.getElementsByTagName('object')[0];
+              function setVizHeight(){
+                var w = divElement.offsetWidth;
+                /* Ratio más bajo en desktop para eliminar el gran espacio blanco */
+                var ratio = 0.42;          // desktop
+                if (w < 900) ratio = 0.58;  // tablets
+                if (w < 600) ratio = 0.82;  // móviles
+                vizElement.style.width = '100%';
+                vizElement.style.height = (w * ratio) + 'px';
+              }
+              setVizHeight();
+              var scriptElement = document.createElement('script');
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);
+              window.addEventListener('resize', setVizHeight);
+              window.addEventListener('orientationchange', setVizHeight);
+            })();
           </script>
         </div>
       </article>
